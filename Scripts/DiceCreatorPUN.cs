@@ -63,18 +63,18 @@ public class DiceCreatorPUN : DiceCreator
 		}
 	}
 
-	override protected void DestroyOldDice()
-	{
-		DestroyObject(wuerfelGO);
+    override protected void DestroyOldDice()
+    {
+        DestroyObject(wuerfelGO);
 
-		if(createdDiceWithCam!=null && createdDiceWithCam.Count > 0)
-		{
-			foreach (var dCam in createdDiceWithCam)
-			{
-				PhotonNetwork.Destroy(dCam.dice);
-				DestroyObject(dCam.cam);
-			}
-		}
-	}
+        if (createdDiceWithCam != null && createdDiceWithCam.Count > 0)
+        {
+            foreach (var dCam in createdDiceWithCam)
+            {
+                PhotonNetwork.Destroy(dCam.dice);
+                DestroyObject(dCam.cam);
+            }
+        }
+    }
 
 }
