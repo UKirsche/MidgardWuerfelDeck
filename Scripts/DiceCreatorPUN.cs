@@ -6,7 +6,9 @@ public class DiceCreatorPUN : DiceCreator
 {
 
 	override protected void InstantiateDice (WürfelTyp typ, Vector3 position, int anzahl){
-		
+
+        ToolboxDice diceVars = ToolboxDice.Instance;
+
 		if (anzahl > 0) {
 			DiceWithCam dCam;
 			CreateParentGameObject ();
@@ -21,26 +23,26 @@ public class DiceCreatorPUN : DiceCreator
 				switch (typ) {
 				case WürfelTyp.w6:
 					if (count % 2 == 0) {
-						dCam.dice = PhotonNetwork.Instantiate ("d6black", position, Quaternion.identity, 0);
-					} else {
-						dCam.dice = PhotonNetwork.Instantiate ("d6blue", position, Quaternion.identity, 0);
+                            dCam.dice = PhotonNetwork.Instantiate(diceVars.colorDice_d6, position, Quaternion.identity, 0);
+                    } else {
+                            dCam.dice = PhotonNetwork.Instantiate ("d6black", position, Quaternion.identity, 0);
 					}
 
 					dCam.dice.name = "W6_" + count;
 					break;
 				case WürfelTyp.w10:
 					if (count % 2 == 0) {
-						dCam.dice = PhotonNetwork.Instantiate ("d10black", position, Quaternion.identity, 0);
+                            dCam.dice = PhotonNetwork.Instantiate (diceVars.colorDice_d10, position, Quaternion.identity, 0);
 					} else {
-						dCam.dice = PhotonNetwork.Instantiate ("d10blue", position, Quaternion.identity, 0);
+                            dCam.dice = PhotonNetwork.Instantiate ("d10black", position, Quaternion.identity, 0);
 					}
 					dCam.dice.name = "W10_" + count;
 					break;
 				case WürfelTyp.w20:
 					if (count % 2 == 0) {
-						dCam.dice = PhotonNetwork.Instantiate ("d20black", position, Quaternion.identity, 0);
+                            dCam.dice = PhotonNetwork.Instantiate (diceVars.colorDice_d20, position, Quaternion.identity, 0);
 					} else {
-						dCam.dice = PhotonNetwork.Instantiate ("d20blue", position, Quaternion.identity, 0);
+						dCam.dice = PhotonNetwork.Instantiate ("d20black", position, Quaternion.identity, 0);
 					}
 					dCam.dice.name = "W20_" + count;
 					break;
