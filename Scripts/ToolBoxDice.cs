@@ -17,7 +17,7 @@ public class ToolboxDice : Singleton<ToolboxDice>
     public const string GREEN_STRING_OPTION = "Grün";
     public const string GREEN_D6_PREFAB = "d6green";
     public const string GREEN_D10_PREFAB = "d10green";
-    public const string GREEN_D20_PREFAB = "d20bgreen";
+    public const string GREEN_D20_PREFAB = "d20green";
     public const string MASTER_STRING_OPTION  = "Meisterle";
     public const string MASTER_D6_PREFAB = "d6master";
     public const string MASTER_D10_PREFAB = "d10master";
