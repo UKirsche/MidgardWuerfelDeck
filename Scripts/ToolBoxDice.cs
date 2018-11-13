@@ -7,6 +7,7 @@ using System.Reflection;
 public class ToolboxDice : Singleton<ToolboxDice>
 {
     public const string BLAU_STRING_OPTION = "Blau";
+
     public const string BLAU_D6_PREFAB = "d6blue";
     public const string BLAU_D10_PREFAB = "d10blue";
     public const string BLAU_D20_PREFAB = "d20blue";
@@ -23,6 +24,21 @@ public class ToolboxDice : Singleton<ToolboxDice>
     public const string MASTER_D10_PREFAB = "d10master";
     public const string MASTER_D20_PREFAB = "d20master";
     public  string colorDice_d6, colorDice_d10, colorDice_d20;
+
+    #region DSA Würfel
+    public const string DSA_D20_PREFAB_NAME_MUT = "d20mut";
+    public const string DSA_D20_PREFAB_NAME_KLUG = "d20klug";
+    public const string DSA_D20_PREFAB_NAME_INTUITION = "d20intuition";
+    public const string DSA_D20_PREFAB_NAME_CHARISMA = "d20charisma";
+    public const string DSA_D20_PREFAB_NAME_FF = "d20ff";
+    public const string DSA_D20_PREFAB_NAME_GW = "d20gw";
+    public const string DSA_D20_PREFAB_NAME_KO = "d20ko";
+    public const string DSA_D20_PREFAB_NAME_KK = "d20kk";
+    public string prefabNameDSA_d20_1, prefabNameDSA_d20_2, prefabNameDSA_d20_3;
+    #endregion
+
+
+
     protected ToolboxDice() {} // guarantee this will be always a singleton only - can't use the constructor!
 
     private string colorDice;
@@ -49,5 +65,9 @@ public class ToolboxDice : Singleton<ToolboxDice>
             } 
         }
     }
+
+
+    public List<String> dsaChosenPrefabs = new List<string>();
+
 
 }
