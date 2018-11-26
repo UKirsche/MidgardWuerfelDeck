@@ -36,13 +36,15 @@ public class SetToggleColors : MonoBehaviour
     public void mutToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownMut);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_MUT);
-    }
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_MUT);
 
+    }
 
     public void mutDropdownDiceNumberChanged(int chosenIndex){
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleMut);
+        bool activated = GetToggleValue(toggleMut);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_MUT);
+
     }
     #endregion
 
@@ -50,13 +52,15 @@ public class SetToggleColors : MonoBehaviour
     public void klugheitToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownKlugheit);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_KLUG);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KLUG);
     }
 
     public void klugheitDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleKlugheit);
+        bool activated = GetToggleValue(toggleKlugheit);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KLUG);
+
     }
     #endregion
 
@@ -64,14 +68,15 @@ public class SetToggleColors : MonoBehaviour
     public void intuitionToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownIntuition);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_INTUITION);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_INTUITION);
 
     }
 
     public void intuitionDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleIntuition);
+        bool activated = GetToggleValue(toggleIntuition);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_INTUITION);
     }
     #endregion
 
@@ -79,13 +84,15 @@ public class SetToggleColors : MonoBehaviour
     public void charismaToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownCharisma);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_CHARISMA);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_CHARISMA);
     }
 
     public void charismaDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleCharisma);
+        bool activated = GetToggleValue(toggleCharisma);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_CHARISMA);
+
     }
     #endregion
 
@@ -93,13 +100,14 @@ public class SetToggleColors : MonoBehaviour
     public void fingerfertigkeitToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownFingerfertigkeit);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_FF);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_FF);
     }
 
     public void fingerfertigkeitDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleFingerfertigkeit);
+        bool activated = GetToggleValue(toggleFingerfertigkeit);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_FF);
     }
     #endregion
 
@@ -107,14 +115,16 @@ public class SetToggleColors : MonoBehaviour
     public void gewandtheitToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownGewandtheit);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_GW);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_GW);
 
     }
 
     public void gewandtheitDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleGewandtheit);
+        bool activated = GetToggleValue(toggleGewandtheit);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_GW);
+
     }
     #endregion  
 
@@ -122,14 +132,15 @@ public class SetToggleColors : MonoBehaviour
     public void konstitutionToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownKonstitution);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_KO);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KO);
 
     }
 
     public void konstitutionDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleKonstitution);
+        bool activated = GetToggleValue(toggleKonstitution);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KO);
     }
     #endregion
 
@@ -137,36 +148,39 @@ public class SetToggleColors : MonoBehaviour
     public void koerperkraftToggleButtonClicked(bool activated)
     {
         int numberDice = GetNumberDice(dropDownKörperkraft);
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_KK);
+        SetDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KK);
 
     }
 
     public void koerperkraftDropdownDiceNumberChanged(int chosenIndex)
     {
         int numberDice = chosenIndex + 1;
-        bool actived = GetToggleValue(toggleKörperkraft);
+        bool activated = GetToggleValue(toggleKörperkraft);
+        ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_KK);
     }
     #endregion
 
     #region Helpers zum Setzen der Prefabsnamen
-    private void setPrefabName(bool activated, string prefabName)
-    {
+    private void SetDSADiceChosen(bool activated, int numberDice, string prefabName){
+
         ToolboxDice diceVar = ToolboxDice.Instance;
 
-        if (activated)
-        {
-            diceVar.dsaChosenPrefabs.Add(prefabName);
-            Debug.Log(prefabName + " aktiviert");
+        if(activated){
+            diceVar.dsaDiceChosen.Add(prefabName, numberDice);
+            
+        } else {
+            diceVar.dsaDiceChosen.Remove(prefabName);
         }
-        else
-        {
-            diceVar.dsaChosenPrefabs.Remove(prefabName); 
-            Debug.Log(prefabName + " deaktiviert");
-        }
+        
     }
 
-    private void setDSADiceChosen(){
-        
+    private void ModifyDSADiceChosen(bool activated, int numberDice, string prefabName){
+
+        ToolboxDice diceVar = ToolboxDice.Instance;
+
+        if(activated){
+            diceVar.dsaDiceChosen[prefabName] = numberDice;
+        }
     }
     #endregion
 
