@@ -68,6 +68,7 @@ public class ToolboxDice : Singleton<ToolboxDice>
 
 
     public List<String> dsaChosenPrefabs = new List<string>();
+    public Dictionary<String, int> diceChosen = new Dictionary<string, int>();
 
 
 }
