@@ -28,38 +28,42 @@ public class DiceCreatorDSA : DiceCreator
 
         if (anzahlEigenschaften > 0)
         {
-            DiceWithCam dCam;
             CreateParentGameObject();
-
             foreach (var prefab in diceVars.dsaDiceChosen.Keys)
             {
-                for (int i = 0; i < diceVars.dsaDiceChosen[prefab]; i++)
-                {
-                    //Erzeuge jeweils neue Kamera mit Würfel
-                    dCam = new DiceWithCam(WürfelTyp.w20);
-                    position.y += count;
-
-                    SetParentGameObject(dCam);
-
-                    dCam.dice = PhotonNetwork.Instantiate(prefab, position, Quaternion.identity, 0);
-
-
-                    //Beschleunige und rotiere den Würfel
-                    RotateAndAccelerate(dCam.dice);
-
-                    //Positioniere die Kamera auf Würfel
-                    PositionCam(dCam);
-
-                    //füge den Würfel mit Kamera der UpdateListe hinzu
-                    createdDiceWithCam.Add(dCam);
-
-                    //Zähle aktuelle Wüfel nach oben
-                    countAllDice++;
-
-                    //aktueller counter
-                    count++;
-                }
+                RollDiceOfPrefab(ref position, diceVars, ref count, prefab);
             }
+        }
+    }
+
+    private void RollDiceOfPrefab(ref Vector3 position, ToolboxDice diceVars, ref int count, string prefab)
+    {
+        DiceWithCam dCam;
+        for (int i = 0; i < diceVars.dsaDiceChosen[prefab]; i++)
+        {
+            //Erzeuge jeweils neue Kamera mit Würfel
+            dCam = new DiceWithCam(WürfelTyp.w20);
+            position.y += count;
+
+            SetParentGameObject(dCam);
+
+            dCam.dice = PhotonNetwork.Instantiate(prefab, position, Quaternion.identity, 0);
+
+
+            //Beschleunige und rotiere den Würfel
+            RotateAndAccelerate(dCam.dice);
+
+            //Positioniere die Kamera auf Würfel
+            PositionCam(dCam);
+
+            //füge den Würfel mit Kamera der UpdateListe hinzu
+            createdDiceWithCam.Add(dCam);
+
+            //Zähle aktuelle Wüfel nach oben
+            countAllDice++;
+
+            //aktueller counter
+            count++;
         }
     }
 
