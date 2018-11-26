@@ -43,7 +43,7 @@ public class SetToggleColors : MonoBehaviour
 
     public void konstitutionToggleButtonClicked(bool activated)
     {
-        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_KK);
+        setPrefabName(activated, ToolboxDice.DSA_D20_PREFAB_NAME_KO);
 
     }
 
