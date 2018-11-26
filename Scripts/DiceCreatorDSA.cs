@@ -23,39 +23,42 @@ public class DiceCreatorDSA : DiceCreator
     {
 
         ToolboxDice diceVars = ToolboxDice.Instance;
-        int anzahl = diceVars.dsaChosenPrefabs.Count;
+        int anzahlEigenschaften = diceVars.dsaDiceChosen.Count;
         int count = 0;
 
-        if (anzahl > 0)
+        if (anzahlEigenschaften > 0)
         {
             DiceWithCam dCam;
             CreateParentGameObject();
 
-            foreach (var prefab in diceVars.dsaChosenPrefabs)
+            foreach (var prefab in diceVars.dsaDiceChosen.Keys)
             {
-                //Erzeuge jeweils neue Kamera mit Würfel
-                dCam = new DiceWithCam(WürfelTyp.w20);
-                position.y += count;
+                for (int i = 0; i < diceVars.dsaDiceChosen[prefab]; i++)
+                {
+                    //Erzeuge jeweils neue Kamera mit Würfel
+                    dCam = new DiceWithCam(WürfelTyp.w20);
+                    position.y += count;
 
-                SetParentGameObject(dCam);
+                    SetParentGameObject(dCam);
 
-                dCam.dice = PhotonNetwork.Instantiate(prefab, position, Quaternion.identity, 0);
+                    dCam.dice = PhotonNetwork.Instantiate(prefab, position, Quaternion.identity, 0);
 
-               
-                //Beschleunige und rotiere den Würfel
-                RotateAndAccelerate(dCam.dice);
 
-                //Positioniere die Kamera auf Würfel
-                PositionCam(dCam);
+                    //Beschleunige und rotiere den Würfel
+                    RotateAndAccelerate(dCam.dice);
 
-                //füge den Würfel mit Kamera der UpdateListe hinzu
-                createdDiceWithCam.Add(dCam);
+                    //Positioniere die Kamera auf Würfel
+                    PositionCam(dCam);
 
-                //Zähle aktuelle Wüfel nach oben
-                countAllDice++;
+                    //füge den Würfel mit Kamera der UpdateListe hinzu
+                    createdDiceWithCam.Add(dCam);
 
-                //aktueller counter
-                count++;
+                    //Zähle aktuelle Wüfel nach oben
+                    countAllDice++;
+
+                    //aktueller counter
+                    count++;
+                }
             }
         }
     }
