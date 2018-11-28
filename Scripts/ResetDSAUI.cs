@@ -13,6 +13,7 @@ public class ResetDSAUI : MonoBehaviour {
         mutDropdown.value = 0;
         klugheitDropdown.value = 0;
         intuitionDropdown.value = 0;
+
         charismaDropdown.value = 0;
         ffDropdown.value = 0;
         gewandtheitDropdown.value = 0;
