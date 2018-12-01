@@ -37,6 +37,8 @@ public class ToolboxDice : Singleton<ToolboxDice>
     public string prefabNameDSA_d20_1, prefabNameDSA_d20_2, prefabNameDSA_d20_3;
     #endregion
 
+    public static readonly Vector3[] w6Normals = new[] { new Vector3(0, 1.0f, 0), new Vector3(0, 0, -1.0f),new Vector3(1.0f, 0, 0),
+        new Vector3(-1.0f,0,0),new Vector3(0,0,1.0f), new Vector3(0,-1.0f,0)};
 
 
     protected ToolboxDice() {} // guarantee this will be always a singleton only - can't use the constructor!
