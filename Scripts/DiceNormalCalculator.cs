@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dice normal calculator. Die Grundlage dafür ist ein Würfel, der genau auf der Kante steht.
+/// 
+/// </summary>
 public class DiceNormalCalculator : MonoBehaviour
 {
+    public const float D20_START_ROTATION = -20.91f;
+    public static float PHI = (1 + Mathf.Sqrt(5))/ 2;
 
-    public static float PHI = 1 + Mathf.Sqrt(5) / 2;
-
-    private List<Vector3> diceNomals;
+    private List<Vector3> diceNomals=new List<Vector3>();
     public List<Vector3> DiceNormals{
         get
         {
@@ -17,10 +21,10 @@ public class DiceNormalCalculator : MonoBehaviour
 
 
     Vector3[] vertices = new Vector3[] {
-        new Vector3(0, -1, PHI), new Vector3(0, -1, PHI), new Vector3(0, 1, -PHI),
-        new Vector3(0, 1, PHI), new Vector3(-1, -PHI, 0), new Vector3(-1, PHI, 0),
-        new Vector3(1, -PHI, 0), new Vector3(1, PHI, 0), new Vector3(-PHI, 0, -1),
-        new Vector3(PHI, 0, -1), new Vector3(-PHI, 0, 1), new Vector3(PHI, 0, 1)
+        new Vector3(0, -1, -PHI), new Vector3(0, -1, PHI), new Vector3(0, 1, -PHI),new Vector3(0, 1, PHI), 
+        new Vector3(-1, -PHI, 0), new Vector3(-1, PHI, 0),new Vector3(1, -PHI, 0), new Vector3(1, PHI, 0),
+        new Vector3(-PHI, 0, -1),new Vector3(PHI, 0, -1), new Vector3(-PHI, 0, 1), new Vector3(PHI, 0, 1)
+
     };
 
     Vector3[] faces = new Vector3[] {
@@ -32,17 +36,31 @@ public class DiceNormalCalculator : MonoBehaviour
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         computeNormals();
 	}
 	
+    void Start()
+    {
+        
+    }
+
+
     private void computeNormals(){
         foreach (var face in faces)
         {
             Vector3 normal = ExractNormalFromFace(face);
-            diceNomals.Add(normal);
+            Vector3 rotatedNormal = RotateNormal(normal);
+            Vector3 normalNormalized = rotatedNormal.normalized;
+            diceNomals.Add(normalNormalized);
 
         }
+    }
+
+    private Vector3 RotateNormal(Vector3 normalUnrotated){
+        Vector3 rotatedNormal =  Quaternion.Euler(D20_START_ROTATION, 0, 0) * normalUnrotated;
+        return rotatedNormal;
+        
     }
 
     private Vector3 ExractNormalFromFace(Vector3 face)
@@ -52,7 +70,6 @@ public class DiceNormalCalculator : MonoBehaviour
         Vector3 p3 = vertices[(int)face.z];
 
         Vector3 normalPre = (p1 + p2 + p3) / 3;
-        Vector3 normal = normalPre.normalized;
-        return normal;
+        return normalPre;
     }
 }

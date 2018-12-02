@@ -4,45 +4,55 @@ using UnityEngine;
 
 public class DiceSideUp : MonoBehaviour
 {
-
+    private List<Vector3> normals;
+    private int smallestFace;
     void Start()
     {
-        // For sake of example, get number based on current orientation
-        // This makes it possible to test by just rotating it in the editor and hitting play
-        // Allowing 30 degrees error so will give (the side that is mostly upwards)
-        // but will give -1 on "tie"
-
-        //Debug.Log("The side world up has value: " + GetNumber(Vector3.up, 30f));
-        GameObject go =GameObject.FindWithTag("plane1");
-        Vector3 forward = go.transform.up;
-        Debug.Log("Normale 1 " + forward);
+        DiceNormalCalculator normalCalculator = GetComponent<DiceNormalCalculator>();
+        normals = normalCalculator.DiceNormals;
 
     }
 
-    // Gets the number of the side pointing in the same direction as the reference vector,
-    // allowing epsilon degrees error.
-    public int GetNumber(Vector3 referenceVectorUp, float epsilonDeg = 5f)
-    {
-        Vector3[] w6Normals = ToolboxDice.w6Normals;
-
+    /// <summary>
+    /// Ermittelt den kleinsten Winkels der Würfelnormalen zum ReferenceVektor aus World-Space
+    /// Besser nur 1x den ReferenVektor in den ObjektSpace transformieren, als jeden Normalenvektor
+    /// in den Weltspace
+    /// </summary>
+    /// <returns>The closest angle.</returns>
+    /// <param name="referenceVectorUp">Reference vector up.</param>
+    /// <param name="epsilonDeg">Epsilon deg.</param>
+    public float GetClosestAngle(Vector3 referenceVectorUp, float epsilonDeg = 5f){
+        
         // here I would assert lookup is not empty, epsilon is positive and larger than smallest possible float etc
         // Transform reference up to object space
         Vector3 referenceObjectSpace = transform.InverseTransformDirection(referenceVectorUp);
 
         // Find smallest difference to object space direction
-        float min = float.MaxValue;
-        int mostSimilarDirectionIndex = -1;
-        for (int side = 0; side < w6Normals.Length; side++)
+        float smallestAngle = CalculateSmallestAngle(referenceObjectSpace, epsilonDeg);
+        return smallestAngle;
+    }
+
+
+    // Gets the number of the side pointing in the same direction as the reference vector,
+    // allowing epsilon degrees error.
+    public int GetNumber()
+    {
+        return smallestFace;
+    }
+
+    private float CalculateSmallestAngle(Vector3 referenceObjectSpace, float epsilonDeg){
+        // Find smallest difference to object space direction
+        float minAngle = float.MaxValue;
+        smallestFace = -1;
+        for (int side = 0; side < normals.Count; side++)
         {
-            float a = Vector3.Angle(referenceObjectSpace, w6Normals[side]);
-            if (a <= epsilonDeg && a < min)
+            float actAngle = Vector3.Angle(referenceObjectSpace, normals[side]);
+            if (actAngle <= minAngle)
             {
-                min = a;
-                mostSimilarDirectionIndex = side;
+                minAngle = actAngle;
+                smallestFace = side;
             }
         }
-
-        // -1 as error code for not within bounds
-        return mostSimilarDirectionIndex;
+        return minAngle;
     }
 }
