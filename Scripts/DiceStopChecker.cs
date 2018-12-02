@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceStopChecker : MonoBehaviour {
-
+    
     private const float MAXATTEMPTS = 2;
+    private const float MAX_ANGLE_DEVIATION = 5.0f;
     private int impulseCounter;
     private DiceSideUp diceSideUp;
     public Vector3 referenceUpVector;
@@ -21,11 +22,9 @@ public class DiceStopChecker : MonoBehaviour {
         if (IsStandStill())
         {
             float smallestAngle = diceSideUp.GetClosestAngle(referenceUpVector, minDiffAngle);
-            Debug.Log("Kleinster Winkel: " + smallestAngle);
             int smallestFace = diceSideUp.GetNumber();
-            Debug.Log("Seite: " + smallestFace);
-            if(impulseCounter<MAXATTEMPTS){
-                //PushDice();
+            if(smallestAngle > MAX_ANGLE_DEVIATION){
+                PushDice();
             }
 
         }
