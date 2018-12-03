@@ -9,10 +9,6 @@ public class DiceCreatorDSA : DiceCreator
     {
         ClearMyBoard();
 
-
-        //Reste result 
-        CalculateQualityLevel.RESULTTHROW = 0;
-
         //Lege Startposition der einzelnen Würfeltypen fest
         Vector3 startPositionDiceW20 = new Vector3(startPositionDice.x + xzOffsetDice, startPositionDice.y, startPositionDice.z + xzOffsetDice);
 
