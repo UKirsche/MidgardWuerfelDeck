@@ -6,6 +6,11 @@ using System.Reflection;
 
 public class ToolboxDice : Singleton<ToolboxDice>
 {
+    protected ToolboxDice() { } //Garantiert immer Singleton
+
+    public DSAEigenschaften mCharacter = new DSAEigenschaften();
+
+    #region Normale würfel
     public const string BLAU_STRING_OPTION = "Blau";
 
     public const string BLAU_D6_PREFAB = "d6blue";
@@ -24,6 +29,7 @@ public class ToolboxDice : Singleton<ToolboxDice>
     public const string MASTER_D10_PREFAB = "d10master";
     public const string MASTER_D20_PREFAB = "d20master";
     public  string colorDice_d6, colorDice_d10, colorDice_d20;
+    #endregion
 
     #region DSA Würfel
     public const string DSA_D20_PREFAB_NAME_MUT = "d20mut";
@@ -39,9 +45,6 @@ public class ToolboxDice : Singleton<ToolboxDice>
 
     public static readonly Vector3[] w6Normals = new[] { new Vector3(0, 1.0f, 0), new Vector3(0, 0, -1.0f),new Vector3(1.0f, 0, 0),
         new Vector3(-1.0f,0,0),new Vector3(0,0,1.0f), new Vector3(0,-1.0f,0)};
-
-
-    protected ToolboxDice() {} // guarantee this will be always a singleton only - can't use the constructor!
 
     private string colorDice;
     public string ColorDice {

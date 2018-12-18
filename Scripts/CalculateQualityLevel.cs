@@ -10,14 +10,24 @@ public class CalculateQualityLevel : MonoBehaviour
     public InputField ergebnisInput;
     public static int RESULTTHROW;
     private int throwCounter=0;
-    private int numberOfDice = 0;
+    private int dicePerThrow = 0;
     private int resultMut, resultKlugheit, resultIntuition, resultCharisma, resultFF, resultGewandtheit, resultKonstitution, resultKoerperkraft;
 
 
     private void Start()
     {
         ToolboxDice diceVars = ToolboxDice.Instance;
-        numberOfDice = diceVars.dsaDiceChosen.Keys.Count;
+        dicePerThrow = GetNumberDice(diceVars);
+    }
+
+    private int GetNumberDice(ToolboxDice diceVars)
+    {
+        int numberDice = 0;
+        foreach (var prefabName in diceVars.dsaDiceChosen.Keys)
+        {
+            numberDice += diceVars.dsaDiceChosen[prefabName];
+        }
+        return numberDice;
     }
 
     #region Eventhandling wenn Würfel ruhig ist
@@ -116,7 +126,7 @@ public class CalculateQualityLevel : MonoBehaviour
     private void CalculateThrowResult(){
         
         ergebnisInput.text = RESULTTHROW.ToString();
-        if(throwCounter==numberOfDice){
+        if(throwCounter==dicePerThrow){
             RESULTTHROW = 0;
             throwCounter = 0;
         }
