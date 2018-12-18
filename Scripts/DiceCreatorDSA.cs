@@ -8,6 +8,7 @@ public class DiceCreatorDSA : DiceCreator
     public override void ThrowDice()
     {
         ClearMyBoard();
+        ResetDiceCounter();
 
         //Lege Startposition der einzelnen Würfeltypen fest
         Vector3 startPositionDiceW20 = new Vector3(startPositionDice.x + xzOffsetDice, startPositionDice.y, startPositionDice.z + xzOffsetDice);
@@ -79,6 +80,13 @@ public class DiceCreatorDSA : DiceCreator
                 DestroyObject(dCam.cam);
             }
         }
+    }
+
+    /// <summary>
+    /// Resets the dice counter for the automatic calculation in CalculateQualityLevel
+    /// </summary>
+    private void ResetDiceCounter(){
+        CalculateQualityLevel.RESULTTHROW = 0;
     }
 
 }

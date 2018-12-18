@@ -10,73 +10,116 @@ public class CalculateQualityLevel : MonoBehaviour
     public InputField ergebnisInput;
     public static int RESULTTHROW;
     private int throwCounter=0;
-
+    private int numberOfDice = 0;
     private int resultMut, resultKlugheit, resultIntuition, resultCharisma, resultFF, resultGewandtheit, resultKonstitution, resultKoerperkraft;
 
-    private void CalculateThrowResult(){
 
-        ergebnisInput.text = RESULTTHROW.ToString();
-        if(throwCounter==3){
-            RESULTTHROW = 0;
-            throwCounter = 0;
-        }
+    private void Start()
+    {
+        ToolboxDice diceVars = ToolboxDice.Instance;
+        numberOfDice = diceVars.dsaDiceChosen.Keys.Count;
+    }
+
+    #region Eventhandling wenn Würfel ruhig ist
+    void OnEnable()
+    {
+        DiceStopChecker.onStill += HandleOnDiceSet;
+    }
+
+    void OnDisable()
+    {
+        DiceStopChecker.onStill -= HandleOnDiceSet;
     }
 
 
+    void OnDestroy()
+    {
+        Debug.Log("unsign for stand still event");
+        DiceStopChecker.onStill -= HandleOnDiceSet;
+    }
+    #endregion
 
-    public void SetResult(string name, int result){
+
+    /// <summary>
+    /// Handles the on dice set-Event from DiceStopChecker
+    /// </summary>
+    /// <param name="stoppedDice">Item display.</param>
+    public void HandleOnDiceSet(DiceStopChecker stoppedDice)
+    {
+        string diceName = stoppedDice.DiceName;
+        int diceResult = stoppedDice.DiceResult;
         int bonusMalus = DiceCreator.ConvertInFieldToInt(bonusMalusInput);
-        int resultEigenschaft=0;
-        if(name.Contains("mut")){
+        int resultEigenschaft = 0;
+        if (diceName.Contains("mut"))
+        {
             int mut = DiceCreator.ConvertInFieldToInt(mutInput);
             resultEigenschaft = mut + bonusMalus;
 
-            
-        } else if(name.Contains("intuition")){
+
+        }
+        else if (diceName.Contains("intuition"))
+        {
             int intution = DiceCreator.ConvertInFieldToInt(intuituionInput);
             resultEigenschaft = intution + bonusMalus;
-            
-        } else if (name.Contains("klug"))
+
+        }
+        else if (diceName.Contains("klug"))
         {
             int klugheit = DiceCreator.ConvertInFieldToInt(klugheitInput);
             resultEigenschaft = klugheit + bonusMalus;
 
-        } else if (name.Contains("charisma"))
+        }
+        else if (diceName.Contains("charisma"))
         {
             int charisma = DiceCreator.ConvertInFieldToInt(charismaInput);
             resultEigenschaft = charisma + bonusMalus;
 
-        } else if (name.Contains("ff"))
+        }
+        else if (diceName.Contains("ff"))
         {
             int ff = DiceCreator.ConvertInFieldToInt(fingerFertigkeitInput);
             resultEigenschaft = ff + bonusMalus;
 
-        } else if (name.Contains("gw"))
+        }
+        else if (diceName.Contains("gw"))
         {
             int gw = DiceCreator.ConvertInFieldToInt(gewandtheitInput);
             resultEigenschaft = gw + bonusMalus;
 
-        } else if (name.Contains("ko"))
+        }
+        else if (diceName.Contains("ko"))
         {
             int ko = DiceCreator.ConvertInFieldToInt(konstituionInput);
             resultEigenschaft = ko + bonusMalus;
 
-        } else if (name.Contains("kk"))
+        }
+        else if (diceName.Contains("kk"))
         {
             int kk = DiceCreator.ConvertInFieldToInt(koerperkraftInput);
             resultEigenschaft = kk + bonusMalus;
 
         }
 
-        int substract = resultEigenschaft - result;
+        int substract = resultEigenschaft - diceResult;
 
-        if(substract<0){
+        if (substract < 0)
+        {
             RESULTTHROW += substract;
         }
 
         throwCounter++;
 
         CalculateThrowResult();
+    }
+
+
+    private void CalculateThrowResult(){
+        
+        ergebnisInput.text = RESULTTHROW.ToString();
+        if(throwCounter==numberOfDice){
+            RESULTTHROW = 0;
+            throwCounter = 0;
+        }
     }
 
 }

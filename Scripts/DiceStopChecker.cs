@@ -56,7 +56,6 @@ public class DiceStopChecker : MonoBehaviour {
                         onStill.Invoke(this);
                     }
                     Debug.Log("Würfel " + diceName + " steht still");
-                    qualityLevel.SetResult(diceName, diceResult);
                     notSet = false;
                 }
             }

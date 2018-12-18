@@ -12,7 +12,7 @@ public class SetToggleColors : MonoBehaviour
     public const string toggleKlugheit = "ToggleKlugheit";
 
     public const string dropDownIntuition = "DropdownIntuition";
-    public const string toggleIntuition  = "ToggleIntuition";
+    public const string toggleIntuition = "ToggleIntuition";
 
     public const string dropDownCharisma = "DropdownCharisma";
     public const string toggleCharisma = "ToggleCharisma";
@@ -40,7 +40,8 @@ public class SetToggleColors : MonoBehaviour
 
     }
 
-    public void mutDropdownDiceNumberChanged(int chosenIndex){
+    public void mutDropdownDiceNumberChanged(int chosenIndex)
+    {
         int numberDice = chosenIndex + 1;
         bool activated = GetToggleValue(toggleMut);
         ModifyDSADiceChosen(activated, numberDice, ToolboxDice.DSA_D20_PREFAB_NAME_MUT);
@@ -161,24 +162,30 @@ public class SetToggleColors : MonoBehaviour
     #endregion
 
     #region Helpers zum Setzen der Prefabsnamen
-    private void SetDSADiceChosen(bool activated, int numberDice, string prefabName){
+    private void SetDSADiceChosen(bool activated, int numberDice, string prefabName)
+    {
 
         ToolboxDice diceVar = ToolboxDice.Instance;
 
-        if(activated){
+        if (activated)
+        {
             diceVar.dsaDiceChosen.Add(prefabName, numberDice);
-            
-        } else {
+
+        }
+        else
+        {
             diceVar.dsaDiceChosen.Remove(prefabName);
         }
-        
+
     }
 
-    private void ModifyDSADiceChosen(bool activated, int numberDice, string prefabName){
+    private void ModifyDSADiceChosen(bool activated, int numberDice, string prefabName)
+    {
 
         ToolboxDice diceVar = ToolboxDice.Instance;
 
-        if(activated){
+        if (activated)
+        {
             diceVar.dsaDiceChosen[prefabName] = numberDice;
         }
     }
@@ -199,4 +206,5 @@ public class SetToggleColors : MonoBehaviour
         return activated;
     }
     #endregion
+
 }
